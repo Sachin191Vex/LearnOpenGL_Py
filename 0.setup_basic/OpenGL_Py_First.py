@@ -9,6 +9,10 @@ class App:
 
         # initialize pygame and get a clock 
         pg.init()
+        pg.display.gl_set_attribute(pg.GL_CONTEXT_MAJOR_VERSION, 3)
+        pg.display.gl_set_attribute(pg.GL_CONTEXT_MINOR_VERSION, 3)
+        pg.display.gl_set_attribute(pg.GL_CONTEXT_PROFILE_MASK, pg.GL_CONTEXT_PROFILE_CORE)
+
         pg.display.set_mode((800, 600), pg.OPENGL| pg.DOUBLEBUF)
         self.clock = pg.time.Clock()  # Will be used to control frame rate
 
