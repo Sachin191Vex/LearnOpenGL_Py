@@ -9,6 +9,11 @@ from OpenGL.GL import *
 SCREEN_WIDTH  = 800
 SCREEN_HEIGHT = 600
 
+vp_size_changed = False
+def fb_resize_callback(window, w, h):
+    global vp_size_changed
+    vp_size_changed = True
+
 class App3D:
     def __init__(self):
 
@@ -21,20 +26,28 @@ class App3D:
 
         self.window = glfw.create_window(SCREEN_WIDTH, SCREEN_HEIGHT, "LearnOpenGL_Py", None, None)
         glfw.make_context_current(self.window)
+        glfw.set_window_size_callback(self.window, fb_resize_callback)
 
         # self.clock = pg.time.Clock()  # Will be used to control frame rate
 
         # Initialize OpenGL
         glClearColor(0.1, 0.2, 0.2, 1) # R, G, B and alpha
-
         pass
 
     def mainLoop(self):
+        global vp_size_changed
+
         while not glfw.window_should_close(self.window):
             #check events
+            glfw.poll_events()
             if glfw.get_key(self.window, GLFW_CONSTANTS.GLFW_KEY_ESCAPE) == GLFW_CONSTANTS.GLFW_PRESS:
                 break
-            glfw.poll_events()
+
+            if vp_size_changed == True:
+                vp_size_changed = False
+                w, h = glfw.get_framebuffer_size(self.window)
+                glViewport(0, 0, w, h)
+                print("new viewport size:", w, h)
 
             #refresh screen
             glClear(GL_COLOR_BUFFER_BIT)
