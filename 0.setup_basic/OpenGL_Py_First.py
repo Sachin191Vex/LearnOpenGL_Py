@@ -24,6 +24,9 @@ class App:
             for event in pg.event.get():
                 if (event.type == pg.QUIT):
                     running = False
+                elif event.type == pg.KEYDOWN:
+                    if event.key == pg.K_ESCAPE:
+                        return
 
             ## refesh screen - Main Render Loop
             glClear(GL_COLOR_BUFFER_BIT)
