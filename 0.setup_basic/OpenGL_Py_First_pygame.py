@@ -1,5 +1,6 @@
 # Ref: https://www.youtube.com/watch?v=LCK1qdp_HhQ
 # https://github.com/amengede/getIntoGameDev/tree/main/pyopengl%202024
+# Packages: pip install pygame PyOpenGL PyOpenGL_accelerate
 
 import pygame as pg
 from OpenGL.GL import *
